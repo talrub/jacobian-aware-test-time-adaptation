@@ -1,7 +1,7 @@
-# On the Role of the Jacobian in Mamba’s Adversarial Robustness
+# Jacobian-Aware Test-Time Adaptation: Antidotes for Adversarially Robust Mamba Models
 
-This repository supports the NeurIPS 2025 anonymous submission:  
-**"On the Role of the Jacobian in Mamba’s Adversarial Robustness"**
+This repository contains the code for the M.Sc. thesis:  
+**"Jacobian-Aware Test-Time Adaptation: Antidotes for Adversarially Robust Mamba Models"**, Tal Rubinstein, Tel Aviv University, 2026.
 
 We study the impact of **Jacobian Regularization (JR)** on adversarial robustness in **State Space Models (SSMs)**, including both SSMs (S4, DSS, S5, Mamba) and the **VMamba-T** architecture.  
 Our experiments span **CIFAR-10**, **Tiny-ImageNet**, and **ImageNet**, where we evaluate robustness to **PGD-10** and **AutoAttack (AA)**, as well as **ImageNet-A**, **ImageNet-R**, and **ImageNet-S**, where we report standard accuracy under distribution shifts. All evaluations include test-time adaptation (TTA) via the **MEMO** method, with and without JR.
@@ -12,22 +12,18 @@ This repository contains two main directories:
 
 ---
 
-
-This repository contains code for **"On the Role of the Jacobian in Mamba’s Adversarial
-Robustness"** (NeurIPS 2025 Anonymous Submission).
-
 ## 🔧 Installation
 
 ```bash
-git clone https://github.com/anonymousmambarobustness/jacobian-role-in-mamba-robustness.git
-cd jacobian-role-in-mamba-robustness/SSM_robustness
+git clone https://github.com/talrub/jacobian-aware-test-time-adaptation.git
+cd jacobian-aware-test-time-adaptation/SSM_robustness
 pip install -r requirements.txt
 ```
 
 ---
 
 # SSM_robustness
-In this directory we support models such as **S4**, **DSS**, **S5**, and **Mamba**, and evaluate their robustness robustness on **CIFAR-10** and **Tiny-ImageNet** against **PGD-10** and **AutoAttack (AA)**, following training or test-time adaptation (TTA), with and without Jacobian Regularization (JR).
+In this directory we support models such as **S4**, **DSS**, **S5**, and **Mamba**, and evaluate their robustness on **CIFAR-10** and **Tiny-ImageNet** against **PGD-10** and **AutoAttack (AA)**, following training or test-time adaptation (TTA), with and without Jacobian Regularization (JR).
 
 ---
 
@@ -67,7 +63,7 @@ To enable or disable **JR**:
 - `--reg_type gp_correct_class` enables JR 
 - `--reg_type none` disables JR
 
-To control the **strength of JR**, use the `--alpha` flag, which corresponds to λ in our paper.
+To control the **strength of JR**, use the `--alpha` flag, which corresponds to λ in the thesis.
 
 ### Example:
 
@@ -86,7 +82,6 @@ This occurs in the Mamba implementation (`mamba_ssm/ops/selective_scan_interface
 ### ✅ Fix
 
 In the `backward` method of `SelectiveScanFn`, replace:
-python
 ```python
 dconv1d_out = torch.addmm(dconv1d_out, x_proj_weight.t(), dx_dbl.t(), out=dconv1d_out)
 ```
@@ -202,7 +197,7 @@ python3 vmamba_robustness_inference.py --dataset imagenet-a \
 ---
 ## 📄 Citation
 
-*(Anonymous NeurIPS submission)*
+Tal Rubinstein. *Jacobian-Aware Test-Time Adaptation: Antidotes for Adversarially Robust Mamba Models*. M.Sc. thesis, School of Electrical Engineering, Tel Aviv University, 2026.
 
 ---
 
